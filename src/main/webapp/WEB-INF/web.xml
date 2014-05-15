@@ -3,12 +3,12 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
     <servlet>
-        <servlet-name>Hello</servlet-name>
-        <servlet-class>HelloServlet</servlet-class>
+        <servlet-name>BookShelf</servlet-name>
+        <servlet-class>BookShelfServlet</servlet-class>
     </servlet>
     
     <servlet-mapping>
-        <servlet-name>Hello</servlet-name>
-        <url-pattern>/Hello</url-pattern>
+        <servlet-name>BookShelf</servlet-name>
+        <url-pattern>/add</url-pattern>
     </servlet-mapping>
 </web-app>

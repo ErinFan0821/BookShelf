@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 /**
  * Created by techops on 4/24/14.
  */
-public class HelloServlet extends HttpServlet {
+public class BookShelfServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int isbn = Integer.parseInt(request.getParameter("isbn"));
         String name = request.getParameter("name");
@@ -65,7 +65,7 @@ public class HelloServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PrintWriter writer = response.getWriter();
         writer.println("<h1>" + "BookShelf" + "</h1>");
-        writer.println("<form action=\"Hello\" method=\"post\">"+
+        writer.println("<form action=\"add\" method=\"post\">"+
                 "ISBN: <input type=\"text\" name=\"isbn\" />\n" +
                 "Name: <input type=\"text\" name=\"name\" />\n" +
                 "Price: <input type=\"text\" name=\"price\" />\n"+
