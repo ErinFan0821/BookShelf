@@ -11,4 +11,14 @@
         <servlet-name>BookShelf</servlet-name>
         <url-pattern>/add</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>BookShelfShowBooks</servlet-name>
+        <servlet-class>com.erin.book.BookShelfShowBooksServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>BookShelfShowBooks</servlet-name>
+        <url-pattern>/showBook</url-pattern>
+    </servlet-mapping>
 </web-app>
