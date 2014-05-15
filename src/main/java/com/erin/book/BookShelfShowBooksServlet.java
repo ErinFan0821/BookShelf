@@ -1,13 +1,12 @@
 package com.erin.book;
 
-import org.apache.commons.dbcp.BasicDataSource;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -22,16 +21,15 @@ public class BookShelfShowBooksServlet extends HttpServlet {
     public static final String PRICE = "price";
     public static final String AUTHOR = "author";
 
+    String driver;
+    String password;
+    String url;
+    String user;
+
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-
-            BasicDataSource basicDataSource = new BasicDataSource();
-            basicDataSource.setUrl("jdbc:mysql://localhost:3306/BookShelf");
-            basicDataSource.setUsername("root");
-            basicDataSource.setPassword("root");
-            Connection connection = basicDataSource.getConnection();
-
+            Connection connection = getConnection();
             PreparedStatement preparedStmt = connection.prepareStatement("select * from Book");
             ResultSet resultSet = preparedStmt.executeQuery();
             List<BookItem> books = new ArrayList<>();
@@ -50,5 +48,23 @@ public class BookShelfShowBooksServlet extends HttpServlet {
             System.out.println("Connect Failed: " + e.getMessage());
         }
 
+    }
+
+    public void init() throws ServletException {
+        driver = getInitParameter("DRIVER");
+        password = getInitParameter("PASSWORD");
+        url = getInitParameter("URL");
+        user = getInitParameter("USER");
+    }
+
+    private Connection getConnection() {
+        Connection connection = null;
+        try {
+            Class.forName(driver);
+            connection = DriverManager.getConnection(url, user, password);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return connection;
     }
 }
