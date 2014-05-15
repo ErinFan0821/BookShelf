@@ -4,7 +4,7 @@
          version="2.4">
     <servlet>
         <servlet-name>BookShelf</servlet-name>
-        <servlet-class>BookShelfServlet</servlet-class>
+        <servlet-class>com.erin.book.BookShelfServlet</servlet-class>
     </servlet>
     
     <servlet-mapping>

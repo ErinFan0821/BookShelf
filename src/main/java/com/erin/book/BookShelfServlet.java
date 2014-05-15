@@ -1,3 +1,5 @@
+package com.erin.book;
+
 import org.apache.commons.dbcp.BasicDataSource;
 
 import javax.servlet.ServletException;
@@ -5,10 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by techops on 4/24/14.
@@ -40,21 +43,18 @@ public class BookShelfServlet extends HttpServlet {
             preparedStmt.execute();
 
             preparedStmt = connection.prepareStatement("select * from Book");
-            final ResultSet resultSet = preparedStmt.executeQuery();
-            PrintWriter writer = response.getWriter();
+            ResultSet resultSet = preparedStmt.executeQuery();
+            List<BookItem> books = new ArrayList<>();
             while (resultSet.next()) {
-                isbn = resultSet.getInt("isbn");
-                name = resultSet.getString("name");
-                price = resultSet.getDouble("price");
-                author = resultSet.getString("author");
-                System.out.println(isbn + ";" + name + ";" + price + ";" + author);
-                writer.println("<h1>" + "BookShelf" + "</h1>");
-                writer.println("ISBN:" + isbn);
-                writer.println("BookName:" + name);
-                writer.println("Price:" + price);
-                writer.println("Author:" + author);
-
+                BookItem bookItem = new BookItem();
+                bookItem.setName(resultSet.getString("name"));
+                bookItem.setIsbn(resultSet.getInt("isbn"));
+                bookItem.setPrice(resultSet.getDouble("price"));
+                bookItem.setAuthor(resultSet.getString("author"));
+                books.add(bookItem);
             }
+            request.setAttribute("books", books);
+            request.getRequestDispatcher("/WEB-INF/pages/showBooks.jsp").forward(request, response);
 
         } catch (Exception e) {
             System.out.println("Connect Failed: " + e.getMessage());
@@ -63,15 +63,6 @@ public class BookShelfServlet extends HttpServlet {
 }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PrintWriter writer = response.getWriter();
-        writer.println("<h1>" + "BookShelf" + "</h1>");
-        writer.println("<form action=\"add\" method=\"post\">"+
-                "ISBN: <input type=\"text\" name=\"isbn\" />\n" +
-                "Name: <input type=\"text\" name=\"name\" />\n" +
-                "Price: <input type=\"text\" name=\"price\" />\n"+
-                "author: <input type=\"text\" name=\"author\" />\n"+
-                "<input type=\"submit\" value=\"Submit\" />\n"+
-                "</form>"
-        );
+        request.getRequestDispatcher("/WEB-INF/pages/index.jsp").forward(request, response);
     }
 }
