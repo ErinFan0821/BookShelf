@@ -1,14 +1,10 @@
 package com.erin.book;
 
-import org.apache.commons.dbcp.BasicDataSource;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,17 +15,12 @@ public class BookShelfShowBooksServlet extends HttpServlet {
     public static final String PRICE = "price";
     public static final String AUTHOR = "author";
 
-    String driver;
-    String password;
-    String url;
-    String user;
-
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            Connection connection = getConnection();
-            PreparedStatement preparedStmt = connection.prepareStatement("select * from Book");
-            ResultSet resultSet = preparedStmt.executeQuery();
+            Database database = (Database) getServletContext().getAttribute("database");
+
+            final String sql = "select * from Book";
+            ResultSet resultSet = database.selectData(sql);
             List<BookItem> books = new ArrayList<>();
             while (resultSet.next()) {
                 BookItem bookItem = new BookItem();
@@ -46,27 +37,5 @@ public class BookShelfShowBooksServlet extends HttpServlet {
             System.out.println("Connect Failed: " + e.getMessage());
         }
 
-    }
-
-    public void init() throws ServletException {
-        driver = getInitParameter("DRIVER");
-        password = getInitParameter("PASSWORD");
-        url = getInitParameter("URL");
-        user = getInitParameter("USER");
-    }
-
-    private Connection getConnection() {
-        Connection connection = null;
-        try {
-            Class.forName(driver);
-            BasicDataSource basicDataSource = new BasicDataSource();
-            basicDataSource.setUrl(url);
-            basicDataSource.setUsername(user);
-            basicDataSource.setPassword(password);
-            connection = basicDataSource.getConnection();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return connection;
     }
 }
