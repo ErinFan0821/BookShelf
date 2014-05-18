@@ -3,30 +3,6 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
 
-    <listener>
-        <listener-class>com.erin.book.DataSourceListener</listener-class>
-    </listener>
-
-    <context-param>
-        <param-name>driver</param-name>
-        <param-value>com.mysql.jdbc.Driver</param-value>
-    </context-param>
-
-    <context-param>
-        <param-name>url</param-name>
-        <param-value>jdbc:mysql://localhost:3306/BookShelf</param-value>
-    </context-param>
-
-    <context-param>
-        <param-name>user</param-name>
-        <param-value>root</param-value>
-    </context-param>
-
-    <context-param>
-        <param-name>password</param-name>
-        <param-value>root</param-value>
-    </context-param>
-
     <servlet>
         <servlet-name>BookShelf</servlet-name>
         <servlet-class>com.erin.book.BookShelfServlet</servlet-class>
@@ -46,5 +22,14 @@
         <servlet-name>BookShelfShowBooks</servlet-name>
         <url-pattern>/showBook</url-pattern>
     </servlet-mapping>
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:database.xml</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>com.erin.book.DataSourceListener</listener-class>
+    </listener>
 
 </web-app>

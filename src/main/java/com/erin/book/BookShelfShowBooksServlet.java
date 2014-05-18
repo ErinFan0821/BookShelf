@@ -18,7 +18,6 @@ public class BookShelfShowBooksServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             Database database = (Database) getServletContext().getAttribute("database");
-
             final String sql = "select * from Book";
             ResultSet resultSet = database.selectData(sql);
             List<BookItem> books = new ArrayList<>();
