@@ -3,9 +3,10 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
     <bean name="database" class="com.erin.book.Database">
-        <constructor-arg index="0" value="com.mysql.jdbc.Driver"/>
-        <constructor-arg index="1" value="jdbc:mysql://localhost:3306/BookShelf"/>
-        <constructor-arg index="2" value="root"/>
-        <constructor-arg index="3" value="root"/>
+        <property name="driver" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/BookShelf"/>
+        <property name="user" value="root"/>
+        <property name="password" value="root"/>
+
     </bean>
 </beans>
