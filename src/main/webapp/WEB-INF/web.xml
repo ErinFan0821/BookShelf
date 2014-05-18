@@ -5,6 +5,25 @@
     <servlet>
         <servlet-name>BookShelf</servlet-name>
         <servlet-class>com.erin.book.BookShelfServlet</servlet-class>
+        <init-param>
+            <param-name>DRIVER</param-name>
+            <param-value>com.mysql.jdbc.Driver</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>URL</param-name>
+            <param-value>jdbc:mysql://localhost:3306/BookShelf</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>USER</param-name>
+            <param-value>root</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>PASSWORD</param-name>
+            <param-value>root</param-value>
+        </init-param>
     </servlet>
     
     <servlet-mapping>

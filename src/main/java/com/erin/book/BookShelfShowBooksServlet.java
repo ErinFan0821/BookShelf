@@ -1,20 +1,18 @@
 package com.erin.book;
 
+import org.apache.commons.dbcp.BasicDataSource;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by techops on 5/16/14.
- */
 public class BookShelfShowBooksServlet extends HttpServlet {
     public static final String NAME = "name";
     public static final String ISBN = "isbn";
@@ -61,7 +59,11 @@ public class BookShelfShowBooksServlet extends HttpServlet {
         Connection connection = null;
         try {
             Class.forName(driver);
-            connection = DriverManager.getConnection(url, user, password);
+            BasicDataSource basicDataSource = new BasicDataSource();
+            basicDataSource.setUrl(url);
+            basicDataSource.setUsername(user);
+            basicDataSource.setPassword(password);
+            connection = basicDataSource.getConnection();
         } catch (Exception e) {
             e.printStackTrace();
         }
