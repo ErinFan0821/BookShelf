@@ -10,6 +10,7 @@ repositories {
 }
 
 dependencies {
+    compile project (':core')
     providedCompile 'javax.servlet:servlet-api:2.5'
     compile 'mysql:mysql-connector-java:5.1.30'
     compile 'commons-dbcp:commons-dbcp:1.4'

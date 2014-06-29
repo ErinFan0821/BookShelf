@@ -1,8 +1,6 @@
 package com.erin.book;
 
-/**
- * Created by techops on 5/16/14.
- */
+
 public class BookItem {
     private String name;
     private int isbn;
