@@ -1,6 +1,3 @@
-apply plugin: 'java'
-apply plugin: 'idea'
-
 sourceSets {
     main {
         java {

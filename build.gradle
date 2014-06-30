@@ -1,18 +1,10 @@
-import com.sun.tools.javac.resources.compiler
-import com.sun.tools.javac.resources.compiler_ja
-
-apply plugin:'war'
-apply plugin: 'idea'
+apply plugin: 'war'
 apply plugin: 'jetty'
 
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    compile project (':core')
-    providedCompile 'javax.servlet:servlet-api:2.5'
-    compile 'mysql:mysql-connector-java:5.1.30'
-    compile 'commons-dbcp:commons-dbcp:1.4'
-    compile 'org.springframework:spring-context:3.0.0.RELEASE'
+allprojects {
+    apply plugin: 'idea'
+    apply plugin: 'java'
+    repositories {
+        mavenCentral()
+    }
 }

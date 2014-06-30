@@ -27,7 +27,7 @@ public class BookShelfServlet extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        response.sendRedirect("/BookShelf/showBook");
+        response.sendRedirect("/web/showBook");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
